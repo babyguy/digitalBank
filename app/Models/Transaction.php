@@ -9,10 +9,14 @@ class Transaction extends Model
 {
     use HasFactory;
 
-    protected $fillable =  [
+    protected  $fillable =  [
         'value',
         'addressee',
+        'user_id',
     ];
+
+    protected $table= 'transaction';
+    
     public function user(){
         return $this->hasOne(User::class);
     }

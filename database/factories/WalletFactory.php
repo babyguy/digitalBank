@@ -18,8 +18,10 @@ class WalletFactory extends Factory
     public function definition()
     {
         return [
-            'balance'=> fake()->randomFloat(2,9),
-            'user_id'=> User::all()->random()->id,
+            // ramdomFloat => (decimales, valor minimo entero,valor maximo entero)
+            'balance'=> fake()->randomFloat(2,4,100000),
+            // se crea el usuario desde este punto en lugar de el DatabaseSeeder para que le genere 1 wallet a cada usuario existente
+            'user_id'=> User::factory()->create()->id,
         ];
     }
 }
