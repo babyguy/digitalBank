@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class UserController extends Controller 
 {
-
+    // crea un usuario con la informacion solicitada
     public function create(Request $request)
     {
 
@@ -39,11 +39,13 @@ class UserController extends Controller
         return $user;
     }
 
+    // muestra una lista de todos los usuarios registrados
     public function index()
     {
         return User::get();
     }
 
+    // permite actualizar un usuario segun el id que se le envie
     public function update($id, Request $request)
     {
         User::where('id', $id)->update([
