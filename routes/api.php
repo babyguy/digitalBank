@@ -3,6 +3,7 @@
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\WalletController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,15 +23,20 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 // login
-route::post('login',[AuthController::class,'login']);
 
 Route::prefix('user')->group(function () {
+    Route::post('login',[AuthController::class,'login']);
     Route::post('/create',[UserController::class, 'create']);
-    Route::get('/list',[UserController::class, 'index']);
-    Route::post('/update/{id}',[UserController::class, 'update']);
+    
+    Route::middleware('auth')->group(	function(){
+        Route::get('/list',[UserController::class, 'index']);
+        Route::post('/update/{id}',[UserController::class, 'update']);
+        Route::get('/wallet',[WalletController::class,'showWallet']);
+    });
     
 });
 
 Route::prefix('transaction')->middleware('auth')->group(function () {
     Route::post('/create',[TransactionController::class,'create']);
 });
+

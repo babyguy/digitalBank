@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('value');
             $table->string('addressee');
-            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
